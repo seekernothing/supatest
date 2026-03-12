@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { X } from "lucide-react"
 
 interface VideoDialogProps {
@@ -23,6 +23,7 @@ export default function VideoDialog({
       <div onClick={() => setOpen(true)}>{trigger}</div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-2xl border border-[rgba(14,20,40,.09)] bg-white shadow-[0_32px_80px_rgba(0,0,0,.3)] gap-0 [&>button]:hidden">
+          <DialogTitle className="sr-only">{title}</DialogTitle>
           {/* Browser chrome topbar */}
           <div className="flex items-center gap-3 px-4 py-3 bg-[rgba(248,250,252,.95)] border-b border-[rgba(14,20,40,.07)]">
             <div className="flex gap-1.5">

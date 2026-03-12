@@ -1,6 +1,7 @@
 "use client"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { BorderBeam } from "@/components/ui/border-beam"
+import { CodeComparison } from "@/components/ui/code-comparison"
 import SpotlightCard from "@/components/SpotlightCard"
 
 const CHECKS = {
@@ -17,6 +18,22 @@ const INT_TILES = [
   { icon: "⚙️", name: "Jenkins" }, { icon: "🐳", name: "Docker" },
   { icon: "📦", name: "npm" }, { icon: "+39", name: "more", isText: true },
 ]
+
+const BEFORE_CODE = `// login.spec.ts — brittle selectors
+test('user can log in', async () => {
+  await page.click('#btn-submit');  // [!code --]
+  await page.waitForTimeout(3000);  // [!code --]
+  const el = await page.$('.main > div:nth-child(3) > span'); // [!code --]
+  expect(el).toBeTruthy(); // [!code --]
+});`
+
+const AFTER_CODE = `// login.spec.ts — AI-healed ✦
+test('user can log in', async () => {
+  await page.click('[data-testid="submit"]');  // [!code ++]
+  await page.waitForSelector('[data-testid="dashboard"]'); // [!code ++]
+  await expect(page.locator('[data-testid="welcome"]'))  // [!code ++]
+    .toBeVisible(); // [!code ++]
+});`
 
 function FeatTag({ children }: { children: React.ReactNode }) {
   return (
@@ -119,18 +136,17 @@ export default function Features() {
           <SpotlightCard>
             <BorderBeam size={200} duration={10} />
             <div className="text-[13px] font-semibold text-[#0C0E16] mb-4" style={{ fontFamily: "var(--font-sans)" }}>Selector Drift Detected</div>
-            <div className="grid grid-cols-2 gap-3 mb-4">
-              <div className="bg-[rgba(239,68,68,.05)] border border-[rgba(239,68,68,.12)] rounded-[10px] p-3" style={{ fontFamily: "var(--font-mono)", fontSize: "11px", lineHeight: "1.7" }}>
-                <div className="text-[10px] font-bold uppercase tracking-[1px] text-[#DC2626] mb-1.5" style={{ fontFamily: "var(--font-sans)" }}>Before</div>
-                <div className="text-[#EF4444] line-through">#submit-btn</div>
-                <div className="text-[#EF4444] line-through">.checkout {">"} button</div>
-              </div>
-              <div className="bg-[rgba(22,163,74,.05)] border border-[rgba(22,163,74,.12)] rounded-[10px] p-3" style={{ fontFamily: "var(--font-mono)", fontSize: "11px", lineHeight: "1.7" }}>
-                <div className="text-[10px] font-bold uppercase tracking-[1px] text-[#16A34A] mb-1.5" style={{ fontFamily: "var(--font-sans)" }}>After · AI Healed</div>
-                <div className="text-[#16A34A]">[data-testid="submit"]</div>
-                <div className="text-[#16A34A]">button[type="submit"]</div>
-              </div>
+            <div className="rounded-xl overflow-hidden border border-[rgba(14,20,40,.10)] shadow-[0_2px_12px_rgba(0,0,0,.08)]">
+              <CodeComparison
+                beforeCode={BEFORE_CODE}
+                afterCode={AFTER_CODE}
+                language="typescript"
+                filename="login.spec.ts"
+                lightTheme="github-light"
+                darkTheme="github-dark"
+              />
             </div>
+            <div className="mt-4">
             {[
               { label: "Selectors healed", pct: "92%", dur: "1.8s" },
               { label: "Tests passing", pct: "97%", dur: "2.2s" },
@@ -145,6 +161,7 @@ export default function Features() {
                 <span className="text-[11px] font-bold text-[#0C0E16] w-8 text-right">{row.pct}</span>
               </div>
             ))}
+            </div>
           </SpotlightCard>
           <div>
             <FeatTag>⚕ Self-Healing</FeatTag>

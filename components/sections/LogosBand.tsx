@@ -13,7 +13,7 @@ export default function LogosBand() {
         <Marquee pauseOnHover className="[--duration:30s]">
           {LOGOS.map((name) => (
             <div key={name}
-              className="flex items-center gap-2 mx-8 text-[14px] font-bold text-[#94A3B8] opacity-50 grayscale hover:opacity-100 hover:grayscale-0 hover:text-[#0C0E16] transition-all cursor-default"
+              className="flex items-center gap-2 mx-8 text-[14px] font-bold text-[#94A3B8] opacity-70 hover:opacity-100 hover:text-[#2563EB] transition-all cursor-default"
               style={{ fontFamily: "var(--font-sans)" }}>
               <span className="text-base">◈</span> {name}
             </div>

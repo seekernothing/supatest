@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 const LINKS = {
   Product: ["Features","Pricing","Changelog","Roadmap"],
   Developers: ["Documentation","API Reference","CLI Guide","Integrations"],
@@ -9,10 +11,8 @@ export default function Footer() {
     <footer className="border-t border-[rgba(14,20,40,.07)] max-w-[1060px] mx-auto px-6 pt-16 pb-10">
       <div className="grid grid-cols-1 md:grid-cols-[260px_1fr_1fr_1fr] gap-12 mb-12">
         <div>
-          <div className="flex items-center gap-2.5 font-bold text-[17px] text-[#0C0E16] mb-3.5"
-            style={{ fontFamily: "var(--font-sans)" }}>
-            <div className="w-[26px] h-[26px] rounded-lg bg-[#2563EB] flex items-center justify-center text-white text-xs font-bold shadow-[0_2px_8px_rgba(37,99,235,.35)]">S</div>
-            Supatest
+          <div className="mb-3.5">
+            <Image src="/supatest public/supatest logo.png" alt="Supatest" width={120} height={32} className="h-8 w-auto" />
           </div>
           <p className="text-[13.5px] text-[#64748B] leading-[1.7] max-w-[200px]" style={{ fontFamily: "var(--font-sans)" }}>
             The AI-native testing platform for teams who care about quality and shipping speed.

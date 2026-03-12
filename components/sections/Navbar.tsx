@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import Image from "next/image"
 import {
   Navbar as ResizableNavbar,
   NavBody,
@@ -23,11 +24,9 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const Logo = () => (
-    <a href="#" className="flex items-center gap-2.5 font-[var(--font-sans)] text-[17px] font-bold tracking-[-0.4px] text-[#0C0E16] dark:text-white mr-4">
-      <div className="w-[30px] h-[30px] rounded-lg bg-[#2563EB] flex items-center justify-center text-white text-sm font-bold shadow-[0_2px_8px_rgba(37,99,235,.35)]">
-        S
-      </div>
-      Supatest
+    <a href="#" className="flex items-center gap-2.5 mr-4">
+      <Image src="/supatest public/supatest logo.png" alt="Supatest" width={32} height={32} className="h-8 w-auto" />
+      <span className="text-[17px] font-bold tracking-[-0.4px] text-[#0C0E16]" style={{ fontFamily: "var(--font-sans)" }}>Supatest AI</span>
     </a>
   );
 

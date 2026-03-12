@@ -1,13 +1,14 @@
 import { BlurFade } from "@/components/ui/blur-fade"
 import SpotlightCard from "@/components/SpotlightCard"
+import Image from "next/image"
 
 const TESTIMONIALS = [
-  { text: "We went from 2-day regression cycles to under 20 minutes. The auto-healing alone saves us 15+ hours a week of manual maintenance work.", name: "Aryan Kapoor", role: "Lead QA · Razorpay", initials: "AK", bg: "linear-gradient(135deg,#667EEA,#764BA2)", color: "#fff" },
-  { text: "Our PMs can now write tests themselves. That's something I never thought possible. Supatest changed our entire culture around quality.", name: "Sofia Martinez", role: "VP Engineering · Shopify", initials: "SM", bg: "linear-gradient(135deg,#2563EB,#4F46E5)", color: "#fff" },
-  { text: "Every PR now gets automated test coverage with zero manual effort. The GitHub integration is seamless — it genuinely feels like magic.", name: "Liam Turner", role: "Staff Engineer · Linear", initials: "LT", bg: "linear-gradient(135deg,#0EA5E9,#2563EB)", color: "#fff" },
-  { text: "Switched from Selenium + Cypress. Maintenance overhead dropped 90%. Our QA team now focuses on exploratory testing, not firefighting.", name: "Nisha Patel", role: "Director of QA · Zomato", initials: "NP", bg: "linear-gradient(135deg,#F093FB,#F5576C)", color: "#fff" },
-  { text: "The AI-generated bug reports are so detailed our devs fix issues in minutes. No more 'works on my machine' conversations in standups.", name: "Jake Kim", role: "CTO · Fern AI", initials: "JK", bg: "linear-gradient(135deg,#43E97B,#38F9D7)", color: "#000" },
-  { text: "Best ROI of any dev tool we've bought this year. The time saved on maintenance alone pays for the annual plan every single month.", name: "Rachel Chen", role: "Eng Manager · Vercel", initials: "RC", bg: "linear-gradient(135deg,#FA709A,#FEE140)", color: "#000" },
+  { text: "We went from 2-day regression cycles to under 20 minutes. The auto-healing alone saves us 15+ hours a week of manual maintenance work.", name: "Aryan Kapoor", role: "Lead QA · Razorpay", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=96&h=96&fit=crop&auto=format" },
+  { text: "Our PMs can now write tests themselves. That's something I never thought possible. Supatest changed our entire culture around quality.", name: "Sofia Martinez", role: "VP Engineering · Shopify", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&auto=format" },
+  { text: "Every PR now gets automated test coverage with zero manual effort. The GitHub integration is seamless — it genuinely feels like magic.", name: "Liam Turner", role: "Staff Engineer · Linear", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&auto=format" },
+  { text: "Switched from Selenium + Cypress. Maintenance overhead dropped 90%. Our QA team now focuses on exploratory testing, not firefighting.", name: "Nisha Patel", role: "Director of QA · Zomato", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop&auto=format" },
+  { text: "The AI-generated bug reports are so detailed our devs fix issues in minutes. No more 'works on my machine' conversations in standups.", name: "Jake Kim", role: "CTO · Fern AI", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&auto=format" },
+  { text: "Best ROI of any dev tool we've bought this year. The time saved on maintenance alone pays for the annual plan every single month.", name: "Rachel Chen", role: "Eng Manager · Vercel", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&auto=format" },
 ]
 
 export default function Testimonials() {
@@ -35,10 +36,13 @@ export default function Testimonials() {
                   {t.text}
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-[13px] font-bold flex-shrink-0 border-2 border-white shadow-[0_2px_8px_rgba(0,0,0,.08)]"
-                    style={{ background: t.bg, color: t.color, fontFamily: "var(--font-sans)" }}>
-                    {t.initials}
-                  </div>
+                  <Image
+                    src={t.img}
+                    alt={t.name}
+                    width={38}
+                    height={38}
+                    className="rounded-full object-cover border-2 border-white shadow-[0_2px_8px_rgba(0,0,0,.08)] flex-shrink-0"
+                  />
                   <div>
                     <div className="text-[14px] font-bold text-[#0C0E16]" style={{ fontFamily: "var(--font-sans)" }}>{t.name}</div>
                     <div className="text-[12px] text-[#64748B]" style={{ fontFamily: "var(--font-sans)" }}>{t.role}</div>

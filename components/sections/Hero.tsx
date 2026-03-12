@@ -2,14 +2,16 @@
 import VideoDialog from "@/components/VideoDialog"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { ShimmerButton } from "@/components/ui/shimmer-button"
+import { LightRays } from "@/components/ui/light-rays"
+import Image from "next/image"
 
 const WORDS = ["heals itself.", "thinks ahead.", "ships faster."]
 const AVATARS = [
-  { initials: "AK", bg: "linear-gradient(135deg,#667EEA,#764BA2)", color: "#fff" },
-  { initials: "SM", bg: "linear-gradient(135deg,#F093FB,#F5576C)", color: "#fff" },
-  { initials: "LT", bg: "linear-gradient(135deg,#4FACFE,#00F2FE)", color: "#fff" },
-  { initials: "NP", bg: "linear-gradient(135deg,#43E97B,#38F9D7)", color: "#000" },
-  { initials: "JK", bg: "linear-gradient(135deg,#FA709A,#FEE140)", color: "#000" },
+  { img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&fit=crop&auto=format", alt: "AK" },
+  { img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop&auto=format", alt: "SM" },
+  { img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&auto=format", alt: "LT" },
+  { img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&auto=format", alt: "NP" },
+  { img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&auto=format", alt: "JK" },
 ]
 
 const TEST_ROWS = [
@@ -30,6 +32,15 @@ export default function Hero() {
           backgroundSize: "32px 32px",
           maskImage: "radial-gradient(ellipse 70% 60% at 50% 40%, black 0%, transparent 100%)",
         }}
+      />
+
+      {/* Light rays aurora effect */}
+      <LightRays
+        color="rgba(37,99,235,0.3)"
+        count={7}
+        blur={32}
+        speed={14}
+        length="60vh"
       />
 
       {/* Eyebrow */}
@@ -104,11 +115,14 @@ export default function Hero() {
         <div className="flex items-center gap-4 justify-center mt-12 flex-wrap">
           <div className="flex">
             {AVATARS.map((a, i) => (
-              <div key={a.initials}
-                className="w-[30px] h-[30px] rounded-full border-2 border-white text-[11px] font-bold flex items-center justify-center shadow-[0_1px_4px_rgba(0,0,0,.1)]"
-                style={{ marginLeft: i === 0 ? 0 : "-10px", background: a.bg, color: a.color }}>
-                {a.initials}
-              </div>
+              <Image key={a.alt}
+                src={a.img}
+                alt={a.alt}
+                width={30}
+                height={30}
+                className="w-[30px] h-[30px] rounded-full border-2 border-white object-cover shadow-[0_1px_4px_rgba(0,0,0,.1)]"
+                style={{ marginLeft: i === 0 ? 0 : "-10px" }}
+              />
             ))}
           </div>
           <span className="text-[13.5px] text-[#64748B] font-medium" style={{ fontFamily: "var(--font-sans)" }}>
@@ -127,24 +141,24 @@ export default function Hero() {
             style={{ background: "rgba(37,99,235,.14)", filter: "blur(40px)" }} />
           <div className="bg-white/90 border border-[rgba(14,20,40,.09)] rounded-2xl overflow-hidden shadow-[0_2px_4px_rgba(14,20,40,.04),0_24px_80px_rgba(14,20,40,.12)]">
             {/* Topbar */}
-            <div className="flex items-center gap-3 px-4 py-3 bg-[rgba(248,250,252,.95)] border-b border-[rgba(14,20,40,.07)]">
+            <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 bg-[rgba(248,250,252,.95)] border-b border-[rgba(14,20,40,.07)]">
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
               </div>
-              <div className="flex-1 bg-[rgba(14,20,40,.05)] rounded-md px-3 py-1.5 flex items-center gap-2"
+              <div className="flex-1 min-w-0 bg-[rgba(14,20,40,.05)] rounded-md px-2 sm:px-3 py-1.5 flex items-center gap-2 truncate"
                 style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "#64748B" }}>
                 <span className="text-[10px] font-bold text-[#16A34A]">●</span>
-                app.supatest.ai / dashboard
+                <span className="truncate">app.supatest.ai / dashboard</span>
               </div>
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "#94A3B8" }}>v2.0.4</span>
+              <span className="hidden sm:inline" style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "#94A3B8" }}>v2.0.4</span>
             </div>
 
             {/* Body */}
-            <div className="grid min-h-[340px]" style={{ gridTemplateColumns: "220px 1fr" }}>
-              {/* Sidebar */}
-              <div className="bg-[rgba(248,250,252,.8)] border-r border-[rgba(14,20,40,.07)] p-4">
+            <div className="flex min-h-[260px] md:min-h-[340px]">
+              {/* Sidebar — hidden on mobile */}
+              <div className="hidden md:block w-[220px] flex-shrink-0 bg-[rgba(248,250,252,.8)] border-r border-[rgba(14,20,40,.07)] p-4">
                 <div className="mb-5">
                   <div className="text-[10px] uppercase tracking-[1.2px] text-[#94A3B8] font-semibold mb-2 px-1.5"
                     style={{ fontFamily: "var(--font-sans)" }}>Test Suites</div>
@@ -173,10 +187,10 @@ export default function Hero() {
               </div>
 
               {/* Main */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-5">
-                  <span className="text-[14px] font-bold text-[#0C0E16]" style={{ fontFamily: "var(--font-sans)" }}>Login Flow — 8 tests</span>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[rgba(22,163,74,.08)] text-[#15803D] border border-[rgba(22,163,74,.15)]"
+              <div className="flex-1 min-w-0 p-4 sm:p-6">
+                <div className="flex items-center justify-between mb-4 sm:mb-5 gap-2">
+                  <span className="text-[13px] sm:text-[14px] font-bold text-[#0C0E16]" style={{ fontFamily: "var(--font-sans)" }}>Login Flow — 8 tests</span>
+                  <div className="flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[rgba(22,163,74,.08)] text-[#15803D] border border-[rgba(22,163,74,.15)] flex-shrink-0"
                     style={{ fontFamily: "var(--font-sans)" }}>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#16A34A] animate-[blink-dot_2s_ease_infinite]" />
                     Running live
@@ -185,34 +199,34 @@ export default function Hero() {
                 <div className="flex flex-col gap-1.5">
                   {TEST_ROWS.map((row) => (
                     <div key={row.name}
-                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl border border-[rgba(14,20,40,.07)] bg-white/70 text-[12.5px] hover:shadow-[0_1px_2px_rgba(14,20,40,.04),0_4px_16px_rgba(14,20,40,.06)] transition-shadow">
+                      className="flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-xl border border-[rgba(14,20,40,.07)] bg-white/70 text-[11px] sm:text-[12.5px] hover:shadow-[0_1px_2px_rgba(14,20,40,.04),0_4px_16px_rgba(14,20,40,.06)] transition-shadow">
                       <span className="flex-shrink-0" style={{ color: row.iconColor }}>{row.icon}</span>
-                      <span className="flex-1 font-medium text-[#1E2340]" style={{ fontFamily: "var(--font-sans)" }}>{row.name}</span>
-                      <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-[0.5px] ${row.tagCls}`}>{row.tag}</span>
-                      <span className="text-[11px] text-[#94A3B8] whitespace-nowrap" style={{ fontFamily: "var(--font-mono)" }}>{row.time}</span>
+                      <span className="flex-1 min-w-0 font-medium text-[#1E2340] truncate" style={{ fontFamily: "var(--font-sans)" }}>{row.name}</span>
+                      <span className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.5px] flex-shrink-0 ${row.tagCls}`}>{row.tag}</span>
+                      <span className="text-[10px] sm:text-[11px] text-[#94A3B8] whitespace-nowrap hidden sm:inline" style={{ fontFamily: "var(--font-mono)" }}>{row.time}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-3.5 px-3.5 py-2.5 bg-[rgba(37,99,235,.04)] border border-[rgba(37,99,235,.1)] rounded-[10px] flex items-center gap-2.5 text-[12px]">
-                  <span className="text-[14px]">⚕</span>
-                  <span className="text-[#1E2340] flex-1" style={{ fontFamily: "var(--font-sans)" }}>
-                    AI detected <strong className="text-[#2563EB]">selector drift</strong> in 1 test — auto-healing in progress
+                <div className="mt-3 sm:mt-3.5 px-2.5 sm:px-3.5 py-2 sm:py-2.5 bg-[rgba(37,99,235,.04)] border border-[rgba(37,99,235,.1)] rounded-[10px] flex items-center gap-2 sm:gap-2.5 text-[11px] sm:text-[12px]">
+                  <span className="text-[14px] flex-shrink-0">⚕</span>
+                  <span className="text-[#1E2340] flex-1 min-w-0" style={{ fontFamily: "var(--font-sans)" }}>
+                    AI detected <strong className="text-[#2563EB]">selector drift</strong> in 1 test — auto-healing
                   </span>
-                  <div className="text-[11px] font-bold text-[#2563EB] px-2.5 py-1 rounded-md border border-[rgba(37,99,235,.2)] hover:bg-[#2563EB] hover:text-white cursor-pointer transition-all"
+                  <div className="text-[10px] sm:text-[11px] font-bold text-[#2563EB] px-2 sm:px-2.5 py-1 rounded-md border border-[rgba(37,99,235,.2)] hover:bg-[#2563EB] hover:text-white cursor-pointer transition-all flex-shrink-0"
                     style={{ fontFamily: "var(--font-sans)" }}>View fix</div>
                 </div>
               </div>
             </div>
 
             {/* Footer bar */}
-            <div className="flex items-center gap-5 px-4 py-2.5 bg-[rgba(248,250,252,.9)] border-t border-[rgba(14,20,40,.07)] text-[11.5px] text-[#64748B]"
+            <div className="flex items-center gap-3 sm:gap-5 px-3 sm:px-4 py-2 sm:py-2.5 bg-[rgba(248,250,252,.9)] border-t border-[rgba(14,20,40,.07)] text-[10px] sm:text-[11.5px] text-[#64748B] flex-wrap"
               style={{ fontFamily: "var(--font-sans)" }}>
               <div className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#16A34A]" /> 6 passed</div>
               <div className="w-px h-3.5 bg-[rgba(14,20,40,.07)]" />
               <div className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" /> 1 healing</div>
               <div className="w-px h-3.5 bg-[rgba(14,20,40,.07)]" />
               <div className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" /> 1 running</div>
-              <span className="ml-auto" style={{ fontFamily: "var(--font-mono)", fontSize: "11px" }}>Chrome 124 · macOS</span>
+              <span className="ml-auto hidden sm:inline" style={{ fontFamily: "var(--font-mono)", fontSize: "11px" }}>Chrome 124 · macOS</span>
             </div>
           </div>
         </div>
